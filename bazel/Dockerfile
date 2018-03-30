@@ -1,9 +1,13 @@
-FROM ubuntu:xenial
+FROM launcher.gcr.io/google/ubuntu16_04
 
 RUN \
     # This makes add-apt-repository available.
     apt-get update && \
-    apt-get -y install python software-properties-common unzip && \
+    apt-get -y install \
+        python \
+        python-pkg-resources \
+        software-properties-common \
+        unzip && \
 
     # Install Git >2.0.1
     add-apt-repository ppa:git-core/ppa && \
@@ -22,7 +26,7 @@ RUN \
       $(lsb_release -cs) \
       stable edge" && \
     apt-get -y update && \
-    apt-get install -y docker-ce=17.06.1~ce-0~ubuntu unzip && \
+    apt-get install -y docker-ce=17.12.0~ce-0~ubuntu unzip && \
     apt-get update && \
 
     # Install bazel (https://docs.bazel.build/versions/master/install-ubuntu.html)

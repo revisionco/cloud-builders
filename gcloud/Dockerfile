@@ -1,9 +1,11 @@
-FROM ubuntu:trusty
+FROM launcher.gcr.io/google/ubuntu16_04
 
 RUN apt-get -y update && \
     apt-get -y install gcc python2.7 python-dev python-setuptools wget ca-certificates \
        # These are necessary for add-apt-respository
-       software-properties-common python-software-properties && \
+       software-properties-common python-software-properties \
+       # JRE is required for cloud-datastore-emulator
+       default-jre && \
 
     # Install Git >2.0.1
     add-apt-repository ppa:git-core/ppa && \
@@ -17,10 +19,27 @@ RUN apt-get -y update && \
         --bash-completion=false \
         --disable-installation-options && \
 
-    # Install additional components
+    # Install all available components
     /builder/google-cloud-sdk/bin/gcloud -q components install \
-        alpha beta kubectl && \
+        alpha beta \
+        app-engine-go \
+        app-engine-java \
+        app-engine-php \
+        app-engine-python \
+        app-engine-python-extras \
+        bigtable \
+        cbt \
+        cloud-datastore-emulator \
+        container-builder-local \
+        datalab \
+        docker-credential-gcr \
+        emulator-reverse-proxy \
+        kubectl \
+        pubsub-emulator \
+        && \
+
     /builder/google-cloud-sdk/bin/gcloud -q components update && \
+    /builder/google-cloud-sdk/bin/gcloud components list && \
 
     # install crcmod: https://cloud.google.com/storage/docs/gsutil/addlhelp/CRC32CandInstallingcrcmod
     easy_install -U pip && \
