@@ -20,11 +20,9 @@ steps:
 - name: 'gcr.io/$PROJECT_ID/node8/yarn'
   args: ['install']
   dir: 'examples/hello_world'
+
 - name: 'gcr.io/$PROJECT_ID/node8/yarn'
   args: ['test']
-  dir: 'examples/hello_world'
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '.']
   dir: 'examples/hello_world'
 
 images:

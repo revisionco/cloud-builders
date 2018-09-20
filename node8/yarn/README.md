@@ -1,3 +1,5 @@
+# DEPRECATED: Use official node:8.11.0 image instead
+
 # Tool builder: `gcr.io/cloud-builders/yarn`
 
 This Container Builder build step runs the `yarn` tool.
